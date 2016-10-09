@@ -11,14 +11,10 @@ export class File {
   public imports?: string[];
 
   constructor(opts: { content: string, kind: FileKind, path?: string, issues?: Array<Issue>, imports?: string[] }) {
-    if (opts == null)
-      throw Error("opts cannot be null");
-    if (opts.content == null)
-      throw Error("content cannot be null");
-    if (opts.kind == null)
-      throw Error("kind cannot be null");
     if (opts.path && opts.path.trim() == "")
       throw Error("path cannot be empty string");
+    
+    // FIXME @MeirionHughes - are issues and imports really required or not? Based on callers of this constructor I'd say they shouldn't be required, but based on following checks it looks like they are required
     if (opts.issues === null)
       throw Error("issues cannot be null");
     if (opts.imports === null)
